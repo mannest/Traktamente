@@ -17,9 +17,9 @@
 <p id="result" style="color:red"></p>
 </form>
 
-<!--Det här är radio knapparna-->     
+<!--Det här är checkbox knapparna-->     
 {% if differens %}
-
+<form id = "boxar">
 <table border="1">
 
 <tr>
@@ -39,14 +39,22 @@
 <td><input type="checkbox" name="Lunch{{i}}" value="Lunch"></td>
 <td><input type="checkbox" name="Middag{{i}}" value="Middag"></td>
 <td><input type="checkbox" name="Ingen{{i}}" value="Ingen"></td>
-<td><input type="checkbox" name="eget boende{{i}}" value="eget"></td>
+<td><input type="checkbox" name="eget{{i}}" value="eget"></td>
+<td><input type="checkbox" name="bokat{{i}}" value="bokat"></td>
+
 
 
 </tr>
 
+
+
 {% endfor %}
 
 </table>
+
+<input type="submit" value="Enter" />
+
+</form>
 
 {% endif %}
 

@@ -12,16 +12,17 @@ document.getElementById("form").addEventListener("submit", function(e){
     .then(days => {
         days = parseInt(days)
         let table = "<table border=1>";
-        table += "<tr><th>Dag</th><th>Frukost</th><th>Lunch</th><th>Middag</th><th>Ingen</th></tr>";
+        table += "<tr><th>Dag</th><th>Frukost</th><th>Lunch</th><th>Middag</th><th>Ingen</th><th>Eget</th><th>Bokat</th></tr>";
 
         for (let i = 0; i < days; i++) {
-
             table += `<tr>
             <td>Dag ${i+1}</td>
             <td><input type="checkbox" name="day${i}" value="Frukost"></td>
             <td><input type="checkbox" name="day${i}" value="Lunch"></td>
             <td><input type="checkbox" name="day${i}" value="Middag"></td>
             <td><input type="checkbox" name="day${i}" value="Ingen"></td>
+            <td><input type="checkbox" name="day${i}" value="eget"></td>
+            <td><input type="checkbox" name="day${i}" value="bokat"></td>
             </tr>`;
         }
 
