@@ -3,7 +3,7 @@
 <body>
 
 <!--Det här är Kalenern-->     
-<form id = "form">
+<form method="POST" id = "form">
 <p>Start datum</p>
 <input type="date" name="startdate"/>
 <input type="time" name="starttime"/>
@@ -19,7 +19,8 @@
 
 <!--Det här är checkbox knapparna-->     
 {% if differens %}
-<form id = "boxar">
+<form method="POST" id = "boxar">
+
 <table border="1">
 
 <tr>
@@ -41,13 +42,7 @@
 <td><input type="checkbox" name="Ingen{{i}}" value="Ingen"></td>
 <td><input type="checkbox" name="eget{{i}}" value="eget"></td>
 <td><input type="checkbox" name="bokat{{i}}" value="bokat"></td>
-
-
-
 </tr>
-
-
-
 {% endfor %}
 
 </table>

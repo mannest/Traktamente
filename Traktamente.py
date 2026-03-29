@@ -6,6 +6,16 @@ app = Flask(__name__)
 
 @app.route("/", methods = ["GET","POST"])
 def index():
+
+    if "days" in request.form:
+        days = int(request.form.get("days"))
+
+        for i in range(days):
+            frukost = request.form.get(f"frukost{i}")
+            lunch = request.form.get(f"lunch{i}")
+
+            print(i, frukost, lunch)
+            
     
     #Konstanter
     error_time = None
@@ -29,9 +39,9 @@ def index():
             differens = (end - start).days +1
             #print(differens)
             return str(differens)
+        
 
-    return render_template(
-            'index.html', )
+    return render_template("index.html")
     
 if __name__ == "__main__":
     app.run(debug=True)

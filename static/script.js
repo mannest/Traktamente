@@ -1,6 +1,9 @@
-document.getElementById("form").addEventListener("submit", function(e){
+["form", "boxar"].forEach(id => {
+    const el = document.getElementById(id);
 
-    e.preventDefault();
+    if (el) {
+        el.addEventListener("submit", function(e){
+            e.preventDefault();
 
     const data = new FormData(this);
 
@@ -17,19 +20,27 @@ document.getElementById("form").addEventListener("submit", function(e){
         for (let i = 0; i < days; i++) {
             table += `<tr>
             <td>Dag ${i+1}</td>
-            <td><input type="checkbox" name="day${i}" value="Frukost"></td>
-            <td><input type="checkbox" name="day${i}" value="Lunch"></td>
-            <td><input type="checkbox" name="day${i}" value="Middag"></td>
-            <td><input type="checkbox" name="day${i}" value="Ingen"></td>
-            <td><input type="checkbox" name="day${i}" value="eget"></td>
-            <td><input type="checkbox" name="day${i}" value="bokat"></td>
+            <td><input type="checkbox" name="frukost${i}" value="Frukost"></td>
+            <td><input type="checkbox" name="lunch${i}" value="Lunch"></td>
+            <td><input type="checkbox" name="middag${i}" value="Middag"></td>
+            <td><input type="checkbox" name="ingen${i}" value="Ingen"></td>
+            <td><input type="checkbox" name="egen${i}" value="Eget"></td>
+            <td><input type="checkbox" name="bokat${i}" value="Bokat"></td>
             </tr>`;
         }
 
         table += "</table>";
 
-        document.getElementById("table").innerHTML = table;
-
+document.getElementById("table").innerHTML = `
+    <form method="POST" id="boxar">
+        ${table}
+        <input type="hidden" name="days" value="${days}">
+        <input type="submit" value="Skicka">
+    </form>
+`;
+    
     });
 
 });
+}
+})
