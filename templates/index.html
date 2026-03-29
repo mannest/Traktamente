@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8" />
+    <title>Traktamente</title>
+</head>
 <body>
 
 <!--Det här är Kalenern-->     
-<form method="POST" id = "form">
-<p>Start datum</p>
+<form method="POST" id="form">
+    <p>Start datum</p>
 <input type="date" name="startdate"/>
 <input type="time" name="starttime"/>
 <p>slut datum</p>
@@ -12,13 +16,11 @@
 <input type="time" name="endtime"/>
 <br><br>
 <input type="submit" value="Enter" />
-<div id="table"></div>
-
-<p id="result" style="color:red"></p>
 </form>
 
-<!--Det här är checkbox knapparna-->     
+<form method="POST" id="boxar"></form>
 
+<p id="result" style="color:red"></p>
 
 <script src="/static/script.js"></script>
 </body>

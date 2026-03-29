@@ -6,43 +6,43 @@ app = Flask(__name__)
 
 @app.route("/", methods = ["GET","POST"])
 def index():
-
-    if "days" in request.form:
-        print(request.form.get("days"))
-        days = int(request.form.get("days"))
-
-        for i in range(days):
-            frukost = request.form.get(f"frukost{i}")
-            lunch = request.form.get(f"lunch{i}")
-
-            print(i, frukost, lunch)
-            
-    
-    #Konstanter
     error_time = None
     error_datum = None
     differens = None
 
     if request.method == "POST":
-        startdate = request.form["startdate"]
-        starttime = request.form["starttime"]
-        enddate = request.form["enddate"]
-        endtime = request.form["endtime"]
+        if "startdate" in request.form or "enddate" in request.form or "starttime" in request.form or "endtime" in request.form:
+            startdate = request.form.get("startdate")
+            starttime = request.form.get("starttime")
+            enddate = request.form.get("enddate")
+            endtime = request.form.get("endtime")
 
-        if not startdate or not enddate:
-            return "alla datum måste fyllas i"       
-        elif not starttime or not endtime:
-            return "Start eller slut tid ej ifyllt"
-        else:
-            start = dt.date.fromisoformat(startdate)
-            end = dt.date.fromisoformat(enddate)
+            if not startdate or not enddate:
+                return "alla datum måste fyllas i"
+            elif not starttime or not endtime:
+                return "Start eller slut tid ej ifyllt"
+            else:
+                start = dt.date.fromisoformat(startdate)
+                end = dt.date.fromisoformat(enddate)
+                differens = (end - start).days + 1
+                return str(differens)
 
-            differens = (end - start).days +1
-            #print(differens)
-            return str(differens)
-        
+        if "days" in request.form:
+            days = int(request.form.get("days"))
+            print(request.form.get("days"))
 
+            for i in range(days):
+                frukost = request.form.get(f"frukost{i}")
+                lunch = request.form.get(f"lunch{i}")
+                middag = request.form.get(f"middag{i}")
+                inget = request.form.get(f"ingen{i}")
+                eget = request.form.get(f"eget{i}")
+                bokat = request.form.get(f"bokat{i}")
+
+                print(i, frukost, lunch, middag, inget, eget, bokat)
+
+            return "Skickat!"
     return render_template("index.html")
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
