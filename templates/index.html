@@ -18,40 +18,7 @@
 </form>
 
 <!--Det här är checkbox knapparna-->     
-{% if differens %}
-<form method="POST" id = "boxar">
 
-<table border="1">
-
-<tr>
-<th>Dag</th>
-<th>Frukost</th>
-<th>Lunch</th>
-<th>Middag</th>
-<th>Ingen</th>
-</tr>
-
-{% for i in range(differens) %}
-
-<tr>
-<td>Dag {{ i+1 }}</td>
-
-<td><input type="checkbox" name="Frukost{{i}}" value="Frukost"></td>
-<td><input type="checkbox" name="Lunch{{i}}" value="Lunch"></td>
-<td><input type="checkbox" name="Middag{{i}}" value="Middag"></td>
-<td><input type="checkbox" name="Ingen{{i}}" value="Ingen"></td>
-<td><input type="checkbox" name="eget{{i}}" value="eget"></td>
-<td><input type="checkbox" name="bokat{{i}}" value="bokat"></td>
-</tr>
-{% endfor %}
-
-</table>
-
-<input type="submit" value="Enter" />
-
-</form>
-
-{% endif %}
 
 <script src="/static/script.js"></script>
 </body>

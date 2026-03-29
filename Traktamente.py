@@ -8,6 +8,7 @@ app = Flask(__name__)
 def index():
 
     if "days" in request.form:
+        print(request.form.get("days"))
         days = int(request.form.get("days"))
 
         for i in range(days):
