@@ -9,7 +9,7 @@ def index():
     error_time = None
     error_datum = None
     differens = None
-
+    traktamente = 0
     if request.method == "POST":
         if "startdate" in request.form or "enddate" in request.form or "starttime" in request.form or "endtime" in request.form:
             startdate = request.form.get("startdate")
@@ -31,6 +31,7 @@ def index():
             days = int(request.form.get("days"))
             print(request.form.get("days"))
 
+            traktamente = 0
             for i in range(days):
                 frukost = request.form.get(f"frukost{i}")
                 lunch = request.form.get(f"lunch{i}")
@@ -38,8 +39,28 @@ def index():
                 inget = request.form.get(f"ingen{i}")
                 eget = request.form.get(f"eget{i}")
                 bokat = request.form.get(f"bokat{i}")
+                
+                if i == 0:
+                  traktamente = traktamente + 300
+
+                if i > 0:
+                    traktamente = traktamente + 450 
+
+                if frukost == "Frukost":
+                    traktamente = traktamente - 60
+                
+                if lunch == "Lunch":
+                    traktamente = traktamente -105
+                
+                if middag == "Middag":
+                    traktamente = traktamente - 105
+                
+                if bokat == "Bokat" and i > 0:
+                    traktamente = traktamente -150
+
 
                 print(i, frukost, lunch, middag, inget, eget, bokat)
+                print(traktamente)
 
             return "Skickat!"
     return render_template("index.html")
