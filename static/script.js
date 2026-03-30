@@ -147,7 +147,7 @@ boxarForm.addEventListener("submit", function(e) {
         }
 
         if (parsed && parsed.traktamente !== undefined) {
-            const message = `Traktamente: ${parsed.traktamente} kr, Tillägg: ${parsed.tillagg} kr`;
+            const message = `Traktamente: ${parsed.traktamente} kr, Förrättningstillägg: ${parsed.tillagg} kr`;
             console.log(message);
             document.getElementById("result").textContent = message;
             addNote(parsed);
@@ -169,7 +169,7 @@ function addNote(response) {
 
     let displayText;
     if (typeof response === "object" && response !== null && response.traktamente !== undefined) {
-        displayText = `Traktamente: ${response.traktamente} kr\nTillägg: ${response.tillagg} kr`;
+        displayText = `Traktamente: ${response.traktamente} kr\nFörrättningstillägg: ${response.tillagg} kr`;
     } else {
         displayText = response;
     }
