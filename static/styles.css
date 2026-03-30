@@ -1,0 +1,43 @@
+.main {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sidebar {
+    position: sticky;
+    top: 10px;
+    width: 300px;
+}
+
+#notes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* själva lappen */
+.note {
+    background: #fff8a6;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.15);
+    transform: rotate(-1deg);
+    transition: 0.2s;
+}
+
+/* lite “levande känsla” */
+.note:nth-child(even) {
+    transform: rotate(1deg);
+    background: #ffef88;
+}
+
+.note:hover {
+    transform: scale(1.03);
+}

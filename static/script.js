@@ -47,8 +47,19 @@ document.getElementById("form").addEventListener("submit", function(e) {
             </tr>
         </table>`;
 
+        const startdate = data.get("startdate") || "";
+        const starttime = data.get("starttime") || "";
+        const enddate = data.get("enddate") || "";
+        const endtime = data.get("endtime") || "";
+
         const boxar = document.getElementById("boxar");
-        boxar.innerHTML = `${table}<input type="hidden" name="days" value="${days}"><input type="submit" value="Skicka">`;
+        boxar.innerHTML = `${table}
+            <input type="hidden" name="days" value="${days}">
+            <input type="hidden" name="startdate" value="${startdate}">
+            <input type="hidden" name="starttime" value="${starttime}">
+            <input type="hidden" name="enddate" value="${enddate}">
+            <input type="hidden" name="endtime" value="${endtime}">
+            <input type="submit" value="Skicka">`;
 
         attachCheckboxHandlers(boxar);
     });
@@ -127,8 +138,59 @@ boxarForm.addEventListener("submit", function(e) {
         body: data
     })
     .then(res => res.text())
-    .then(res => {
-        console.log("Skickat!");
-        document.getElementById("result").textContent = "Skickat!";
+    .then(text => {
+        let parsed;
+        try {
+            parsed = JSON.parse(text);
+        } catch (err) {
+            parsed = null;
+        }
+
+        if (parsed && parsed.traktamente !== undefined) {
+            const message = `Traktamente: ${parsed.traktamente} kr, Tillägg: ${parsed.tillagg} kr`;
+            console.log(message);
+            document.getElementById("result").textContent = message;
+            addNote(parsed);
+            return;
+        }
+
+        console.log(text);
+        document.getElementById("result").textContent = text;
+        addNote(text);
     });
 });
+
+function addNote(response) {
+    const notes = document.getElementById("notes");
+    const newNote = document.createElement("div");
+    const startDate = document.querySelector("input[name='startdate']")?.value || "";
+    const endDate = document.querySelector("input[name='enddate']")?.value || "";
+    newNote.classList.add("note");
+
+    let displayText;
+    if (typeof response === "object" && response !== null && response.traktamente !== undefined) {
+        displayText = `Traktamente: ${response.traktamente} kr\nTillägg: ${response.tillagg} kr`;
+    } else {
+        displayText = response;
+    }
+
+    let dateLine = "";
+    if (startDate || endDate) {
+        dateLine = `<p>Resa ${startDate}${startDate && endDate ? " till " : ""}${endDate}</p>`;
+    }
+
+    newNote.innerHTML = `
+        ${dateLine}
+        <p style="font-size: 20px; font-weight: bold; white-space: pre-line;">${displayText}</p>
+        <button type="button" class="delete-btn">Ta bort</button>
+    `;
+    const deleteBtn = newNote.querySelector(".delete-btn");
+
+    // när man klickar → ta bort lappen
+    if (deleteBtn) {
+        deleteBtn.addEventListener("click", () => {
+            newNote.remove();
+        });
+    }
+    notes.prepend(newNote);
+}

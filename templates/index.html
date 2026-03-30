@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
+    <link rel="stylesheet" href="/static/styles.css">
     <meta charset="utf-8" />
     <title>Traktamente</title>
 </head>
 <body>
+<div class="main">
+    <div class="content">
+        <!--Det här är Kalenern-->     
+        <form method="POST" id="form">
+            <p>Start datum</p>
+            <input type="date" name="startdate"/>
+            <input type="time" name="starttime"/>
+            <p>slut datum</p>
+            <input type="date" name="enddate"/>
+            <input type="time" name="endtime"/>
+            <br><br>
+            <input type="submit" value="Enter" />
+        </form>
 
-<!--Det här är Kalenern-->     
-<form method="POST" id="form">
-    <p>Start datum</p>
-<input type="date" name="startdate"/>
-<input type="time" name="starttime"/>
-<p>slut datum</p>
-<input type="date" name="enddate"/>
-<input type="time" name="endtime"/>
-<br><br>
-<input type="submit" value="Enter" />
-</form>
+        <form method="POST" id="boxar"></form>
 
-<form method="POST" id="boxar"></form>
+        <p id="result" style="color:red"></p>
+    </div>
 
-<p id="result" style="color:red"></p>
+    <aside class="sidebar">
+    <h2>Traktamente</h2>
+
+    <div id="notes">
+        <!-- post-it lappar hamnar här -->
+    </div>
+    </aside>
+</div>
 
 <script src="/static/script.js"></script>
 </body>
