@@ -32,6 +32,7 @@ def index():
             print(request.form.get("days"))
 
             traktamente = 0
+            tillägg = 0
             for i in range(days):
                 frukost = request.form.get(f"frukost{i}")
                 lunch = request.form.get(f"lunch{i}")
@@ -42,26 +43,31 @@ def index():
                 
                 if i == 0:
                   traktamente = traktamente + 300
+                  tillägg = tillägg + (300 *1.2)
 
                 if i > 0:
                     traktamente = traktamente + 450 
+                    tillägg = tillägg + (300*1.2) + (150*3.1)
 
                 if frukost == "Frukost":
                     traktamente = traktamente - 60
+                    tillägg = tillägg - ((300*1.2)*0.2)
                 
                 if lunch == "Lunch":
                     traktamente = traktamente -105
-                
+                    tillägg = tillägg - ((300*1.2)*0.35)
                 if middag == "Middag":
                     traktamente = traktamente - 105
-                
+                    tillägg = tillägg - ((300*1.2)*0.35)
                 if bokat == "Bokat" and i > 0:
                     traktamente = traktamente -150
-
+                    tillägg = tillägg - (150*3.1)
+            
 
                 print(i, frukost, lunch, middag, inget, eget, bokat)
-                print(traktamente)
-
+                print(f"Traktamente{traktamente}")
+                print(f"Förrättnings tillägg: {tillägg}")
+            #return traktamente, tillägg
             return "Skickat!"
     return render_template("index.html")
 
